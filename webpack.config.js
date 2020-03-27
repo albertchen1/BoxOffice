@@ -2,18 +2,18 @@ const path = require('path');
 
 module.exports = {
   context: __dirname,
-  entry: './frontend/index.jsx',
+  entry: './frontend/index.js',
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '*']
+    extensions: ['.js', '*']
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',

@@ -81,242 +81,263 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/index.jsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./frontend/index.jsx":
-/*!****************************!*\
-  !*** ./frontend/index.jsx ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./frontend/D3/grossing.js":
+/*!*********************************!*\
+  !*** ./frontend/D3/grossing.js ***!
+  \*********************************/
+/*! exports provided: grossing_bubble */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import GameView from '../lib/game_view.js';
-// import Game from '../lib/game.js';
-// import Util from '../lib/util.js';
-// let computerOnly = false;
-// const SPAWN_SPACE = 69;
-// const smallSettings = {
-//   height: 500,
-//   width: 500,
-//   backgroundColor: "#101010",
-//   neutralBaseCount: 4,
-// }
-// const mediumSettings = {
-//   height: 1000,
-//   width: 1000,
-//   backgroundColor: "#101010",
-//   neutralBaseCount: 9,
-// }
-// const largeSettings = {
-//   height: 1080,
-//   width: 1920,
-//   backgroundColor: "#101010",
-//   neutralBaseCount: 16,
-// }
-// const playerColors = [
-//   '#91EB8F',
-//   '#D66342',
-//   '#8ACAF6',
-//   '#AB77D4',
-// ]
-// const gameDifficulty = {
-//   easy: .33,
-//   medium: .66,
-//   hard: .88,
-// }
-// let gameView;
-// let game;
-// function locationPosition(height, width, placement) {
-//   let leftBound = 5,
-//     upperBound = 5,
-//     xPos = 5,
-//     yPos = 5;
-//   let leftBound2 = 5,
-//     upperBound2 = 5,
-//     xPos2 = 5,
-//     yPos2 = 5;
-//   const randomDir = Util.getRandomArbitrary(0, 2);
-//   switch (placement) {
-//     case 0:
-//       // First Base
-//       leftBound = 5;
-//       upperBound = 5;
-//       // Second Base
-//       if (randomDir === 0) {
-//         leftBound2 = leftBound;
-//         upperBound2 = upperBound + Math.floor(1.6 * SPAWN_SPACE);
-//       } else {
-//         leftBound2 = leftBound + Math.floor(1.6 * SPAWN_SPACE);
-//         upperBound2 = upperBound;
-//       }
-//       break;
-//     case 1:
-//       leftBound = width - Math.floor(1.4 * SPAWN_SPACE);
-//       upperBound = 5
-//       if (randomDir === 0) {
-//         leftBound2 = leftBound - Math.floor(1.6 * SPAWN_SPACE);
-//         upperBound2 = upperBound;
-//       } else {
-//         leftBound2 = leftBound;
-//         upperBound2 = upperBound + Math.floor(1.6 * SPAWN_SPACE);
-//       }
-//       break;
-//     case 2:
-//       leftBound = width - Math.floor(1.4 * SPAWN_SPACE);
-//       upperBound = height - Math.floor(1.4 * SPAWN_SPACE);
-//       if (randomDir === 0) {
-//         leftBound2 = leftBound - Math.floor(1.6 * SPAWN_SPACE);
-//         upperBound2 = upperBound;
-//       } else {
-//         leftBound2 = leftBound;
-//         upperBound2 = upperBound - Math.floor(1.6 * SPAWN_SPACE);
-//       }
-//       break;
-//     case 3:
-//       leftBound = 5;
-//       upperBound = height - Math.floor(1.4 * SPAWN_SPACE);
-//       if (randomDir === 0) {
-//         leftBound2 = leftBound + Math.floor(1.6 * SPAWN_SPACE);
-//         upperBound2 = upperBound;
-//       } else {
-//         leftBound2 = leftBound;
-//         upperBound2 = upperBound - Math.floor(1.6 * SPAWN_SPACE);
-//       }
-//       break;
-//     default:
-//       console.log(height, width, placement, "BROKE");
-//       break;
-//   }
-//   xPos = Util.getRandomArbitrary(leftBound, leftBound + SPAWN_SPACE / 4);
-//   yPos = Util.getRandomArbitrary(upperBound, upperBound + SPAWN_SPACE / 4);
-//   const firstBase = [xPos, yPos];
-//   xPos2 = Util.getRandomArbitrary(leftBound2, leftBound2 + SPAWN_SPACE / 4);
-//   yPos2 = Util.getRandomArbitrary(upperBound2, upperBound2 + SPAWN_SPACE / 4);
-//   const secondBase = [xPos2, yPos2];
-//   return {
-//     first: firstBase,
-//     second: secondBase,
-//   };
-// }
-// function newGame() {
-//   if (gameView) gameView.game.gameOver = true;
-//   const audio = document.getElementsByTagName('audio')[0];
-//   audio.play();
-//   let selectedSettings;
-//   document.getElementById('game-toggles').classList.remove('hidden');
-//   switch (document.getElementById('game-setting').value) {
-//     case "small":
-//       selectedSettings = smallSettings;
-//       break;
-//     case "large":
-//       selectedSettings = largeSettings;
-//       break;
-//     default:
-//       selectedSettings = mediumSettings;
-//       break;
-//   }
-//   let numPlayers = document.getElementById('game-players').value;
-//   const startingLocationForPlayers = [];
-//   while (numPlayers > 0) {
-//     let randomLocation = Util.getRandomArbitrary(0, 4);
-//     if (!startingLocationForPlayers.includes(randomLocation)) {
-//       startingLocationForPlayers.push(randomLocation);
-//       numPlayers -= 1;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grossing_bubble", function() { return grossing_bubble; });
+var grossing_bubble = function grossing_bubble() {
+  d3.csv("../../app/assets/imports/2019Grossing.csv", function (d) {
+    return {
+      title: d["Title"],
+      year: +d.Year,
+      grossing: +d["Grossing"].split(",").join(""),
+      grossing2: d.Grossing,
+      acronym: d.Title,
+      genre: d.Genre
+    };
+  }).then(function (data) {
+    var width = 1000;
+    var height = 960;
+    var svg = d3.select("#bubble-chart").append("svg").attr("width", width).attr("height", height).attr("text-anchor", "middle").attr("transform", "translate(" + 230 + "," + 10 + ")");
+    svg.append("text").attr("x", 200).attr("y", -30).attr("dy", "3.5em").attr("text-anchor", "start").style("font-size", "28px").style("font-weight", "bold").text("MOVIE GROSSING");
+    var pack = d3.pack().size([width - 150, height]).padding(1.5);
+    var genres = ["Action", "Adventure", "Black Comedy", "Comedy", "Drama", "Horror", "Romantic Comedy", "Thriller/Suspense"];
+    var color = d3.scaleOrdinal().domain(data.map(function (d) {
+      return d.genre;
+    })).range(['#fbb4ae', '#b3cde3', '#ccebc5', '#ffe9a8']); //circles
+
+    var root = d3.hierarchy({
+      children: data
+    }).sum(function (d) {
+      return d.grossing;
+    });
+    var node = svg.selectAll(".node").data(pack(root).leaves()).enter().append("g").attr("class", "node").attr("transform", function (d) {
+      return "translate(" + d.x + ',' + d.y + ")";
+    });
+    node.append("circle").attr("id", function (d) {
+      return d.id;
+    }).attr("r", function (d) {
+      return d.r;
+    }).style("fill", function (d) {
+      return color(d.data.genre);
+    }).on("mouseover", function (d) {
+      tooltip.text(d.data.title + ": $ " + d.data.grossing2);
+      tooltip.style("visibility", "visible");
+    }).on("mousemove", function () {
+      return tooltip.style("top", d3.event.pageY - 10 + "px").style("left", d3.event.pageX + 10 + "px");
+    }).on("mouseout", function () {
+      return tooltip.style("visibility", "hidden");
+    });
+    node.append("text").text(function (d) {
+      return d.data.acronym;
+    });
+    var legend = svg.selectAll(".legend").data(genres).enter().append("g").attr("class", "legend").attr("transform", "translate(" + 780 + "," + 120 + ")");
+    legend.append("rect").attr("x", 40).attr("y", function (d, i) {
+      return 20 * i;
+    }).attr("width", 15).attr("height", 15).style("fill", function (d) {
+      return color(d);
+    });
+    legend.append("text").attr("x", 60).attr("text-anchor", "start").attr("dy", "1em").attr("y", function (d, i) {
+      return 20 * i;
+    }).text(function (d) {
+      return d;
+    }).attr("font-size", "12px");
+    legend.append("text").attr("x", 80).attr("dy", "-.2em").attr("y", -10).text("Genre").attr("font-size", "17px");
+    var tooltip = d3.select("body").append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden").style("color", "white").style("padding", "8px").style("background-color", "rgba(0, 0, 0, 0.75)").style("border-radius", "6px").text("tooltip");
+  });
+}; // var n = 1, // number of layers
+//     m = 1; // number of samples per layer
+// var margin = { top: 20, right: 50, bottom: 100, left: 75 },
+//     width = 740 - margin.left - margin.right,
+//     height = 500 - margin.top - margin.bottom;
+// var svg = d3.select("#chart-svg").append("svg")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height + margin.top + margin.bottom)
+//     .append("g")
+//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// d3.csv("2019Grossing.csv", function (data) {
+//     var headers = ["Under $100M", "$100M - 200M", "$200M - 300M", "$300M - 400M", "$400M - 500M", "Over $500M"];
+//     var layers = d3.layout.stack()(headers.map(function (Grossing) {
+//         return data.map(function (d) {
+//             return { x: d.Genre, y: +d[Grossing] };
+//         });
+//     }));
+//     var yGroupMax = d3.max(layers, function (layer) { return d3.max(layer, function (d) { return d.y; }); });
+//     var yStackMax = d3.max(layers, function (layer) { return d3.max(layer, function (d) { return d.y0 + d.y; }); });
+//     var xScale = d3.scale.ordinal()
+//         .domain(layers[0].map(function (d) { return d.x; }))
+//         .rangeRoundBands([25, width], .08);
+//     var y = d3.scale.linear()
+//         .domain([0, yStackMax])
+//         .range([height, 0]);
+//     // var color = d3.scale.ordinal()
+//     //     .domain(headers)
+//     //     .range(["#98ABC5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
+//     var xAxis = d3.svg.axis()
+//         .scale(xScale)
+//         .tickSize(0)
+//         .tickPadding(6)
+//         .orient("bottom");
+//     var yAxis = d3.svg.axis()
+//         .scale(y)
+//         .orient("left")
+//         .tickFormat(d3.format(".2s"));
+//     var layer = svg.selectAll(".layer")
+//         .data(layers)
+//         .enter().append("g")
+//         .attr("class", "layer")
+//         .style("fill", function (d, i) { return color(i); });
+//     var rect = layer.selectAll("rect")
+//         .data(function (d) { return d; })
+//         .enter().append("rect")
+//         .attr("x", function (d) { return xScale(d.x); })
+//         .attr("y", height)
+//         .attr("width", xScale.rangeBand())
+//         .attr("height", 0);
+//     rect.transition()
+//         .delay(function (d, i) { return i * 10; })
+//         .attr("y", function (d) { return y(d.y0 + d.y); })
+//         .attr("height", function (d) { return y(d.y0) - y(d.y0 + d.y); });
+//     //********** AXES ************
+//     svg.append("g")
+//         .attr("class", "x axis")
+//         .attr("transform", "translate(0," + height + ")")
+//         .call(xAxis)
+//         .selectAll("text").style("text-anchor", "end")
+//         .attr("dx", "-.8em")
+//         .attr("dy", ".15em")
+//         .attr("transform", function (d) {
+//             return "rotate(-45)"
+//         });
+//     svg.append("g")
+//         .attr("class", "y axis")
+//         .attr("transform", "translate(20,0)")
+//         .call(yAxis)
+//         .append("text")
+//         .attr("transform", "rotate(-90)")
+//         .attr({ "x": -150, "y": -70 })
+//         .attr("dy", ".75em")
+//         .style("text-anchor", "end")
+//         .text("# of campaigns");
+//     var legend = svg.selectAll(".legend")
+//         .data(headers.slice().reverse())
+//         .enter().append("g")
+//         .attr("class", "legend")
+//         .attr("transform", function (d, i) { return "translate(-20," + i * 20 + ")"; });
+//     legend.append("rect")
+//         .attr("x", width - 18)
+//         .attr("width", 18)
+//         .attr("height", 18)
+//         .style("fill", color);
+//     legend.append("text")
+//         .attr("x", width - 24)
+//         .attr("y", 9)
+//         .attr("dy", ".35em")
+//         .style("text-anchor", "end")
+//         .text(function (d) { return d; });
+//     d3.selectAll("input").on("change", change);
+//     var timeout = setTimeout(function () {
+//         d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
+//     }, 2000);
+//     function change() {
+//         clearTimeout(timeout);
+//         if (this.value === "grouped") transitionGrouped();
+//         else transitionStacked();
 //     }
-//   }
-//   game = new Game(selectedSettings);
-//   game.addStars(Util.getRandomArbitrary(69, 420));
-//   game.addNeutralBases(SPAWN_SPACE * 1.5, game.settings.neutralBaseCount);
-//   const canvas = document.getElementById('canvas');
-//   canvas.width = game.settings.width;
-//   canvas.height = game.settings.height;
-//   const context = canvas.getContext('2d');
-//   canvas.addEventListener('click', event => {
-//     const x = event.pageX - canvas.offsetLeft;
-//     const y = event.pageY - canvas.offsetTop;
-//     let clickedBase = false;
-//     game.bases.forEach(base => {
-//       if (y > base.y && y < base.y + base.width && x > base.x && x < base.x + base.width) {
-//         if (!!game.prevClick) {
-//           base.selected = false;
-//           game.prevClick.forEach(b => {
-//             b.selected = false;
-//             if (b === base) {
-//               base.selected = false;
-//             } else {
-//               game.swarm(b, base);
-//             }
-//           })
-//           game.prevClick = undefined;
-//         } else {
-//           if (base.player.humanPlayer) {
-//             base.selected = true;
-//             game.prevClick = [base];
-//           } else {
-//             // Nothing happens for now
-//           }
-//         }
-//         clickedBase = true;
-//       } else {
-//         base.selected = false;
-//       }
-//     });
-//     if (!clickedBase) {
-//       game.prevClick = false;
-//     }
-//   });
-//   const selectedDifficulty = document.getElementById('game-difficulty').value;
-//   startingLocationForPlayers.forEach((loc, index) => {
-//     game.addPlayer({
-//       playerName: `Player ${index + 1}`,
-//       humanPlayer: !computerOnly && index === 0,
-//       thoughtGrowth: !computerOnly && index === 0 ? 0 : gameDifficulty[selectedDifficulty],
-//       color: playerColors[index],
-//       origin: locationPosition(game.settings.height, game.settings.width, loc),
-//     });
-//   });
-//   // game.addPlayer({
-//   //   playerName: "Player 2",
-//   //   humanPlayer: false,
-//   //   color: '#EB7261',
-//   //   origin: [selectedSettings.width-100,selectedSettings.height-100],
-//   //   space: 50,
-//   // })
-//   const muteButton = document.getElementById('mute-button');
-//   muteButton.addEventListener('click', event => {
-//     game.mute = !game.mute;
-//     audio.mute = game.mute;
-//     muteButton.innerText = game.mute ? "Unmute" : "Mute";
-//   });
-//   gameView = new GameView(game, context).start();
-// }
-// function toggleGrid() {
-//   if (game) game.drawGrid = !game.drawGrid;
-// }
-// document.addEventListener("DOMContentLoaded", () => {
-//   const newGameButton = document.getElementById('new-game');
-//   const computerGameButton = document.getElementById('computer-game');
-//   newGameButton.addEventListener('click', event => {
-//     event.target.textContent = "Currently Broken Button";
-//     event.target.disabled = true;
-//     computerGameButton.disabled = true;
-//     newGame();
-//   });
-//   computerGameButton.addEventListener('click', event => {
-//     event.target.textContent = "Computers only";
-//     event.target.disabled = true;
-//     newGameButton.disabled = true;
-//     computerOnly = true;
-//     newGame();
-//   });
-//   const toggleGridButton = document.getElementById('grid-toggle');
-//   toggleGridButton.addEventListener('click', event => {
-//     toggleGrid();
-//   });
+//     function transitionGrouped() {
+//         y.domain([0, yGroupMax]);
+//         rect.transition()
+//             .duration(500)
+//             .delay(function (d, i) { return i * 10; })
+//             .attr("x", function (d, i, j) { return xScale(d.x) + xScale.rangeBand() / n * j; })
+//             .attr("width", xScale.rangeBand() / n)
+//             .transition()
+//             .attr("y", function (d) { return y(d.y); })
+//             .attr("height", function (d) { return height - y(d.y); });
+//         rect.on("mouseover", function () { tooltip.style("display", null); })
+//             .on("mouseout", function () { tooltip.style("display", "none"); })
+//             .on("mousemove", function (d) {
+//                 var xPosition = d3.mouse(this)[0] - 15;
+//                 var yPosition = d3.mouse(this)[1] - 25;
+//                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+//                 tooltip.select("text").text("hello world");
+//             });
+//     };
+//     function transitionStacked() {
+//         y.domain([0, yStackMax]);
+//         rect.transition()
+//             .duration(500)
+//             .delay(function (d, i) { return i * 10; })
+//             .attr("y", function (d) { return y(d.y0 + d.y); })
+//             .attr("height", function (d) { return y(d.y0) - y(d.y0 + d.y); })
+//             .transition()
+//             .attr("x", function (d) { return xScale(d.x); })
+//             .attr("width", xScale.rangeBand());
+//         rect.on("mouseover", function () { tooltip.style("display", null); })
+//             .on("mouseout", function () { tooltip.style("display", "none"); })
+//             .on("mousemove", function (d) {
+//                 var xPosition = d3.mouse(this)[0] - 15;
+//                 var yPosition = d3.mouse(this)[1] - 25;
+//                 // console.log(xPosition);
+//                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+//                 tooltip.select("text").text("hello world");
+//             });
+//     };
+//     var tooltip = svg.append("g")
+//         .attr("class", "tooltip");
+//     tooltip.append("rect")
+//         .attr("width", 30)
+//         .attr("height", 20)
+//         .attr("fill", "red")
+//         .style("opacity", 0.5);
+//     tooltip.append("text")
+//         .attr("x", 15)
+//         .attr("dy", "1.2em")
+//         .style("text-anchor", "middle")
+//         .attr("font-size", "12px")
+//         .attr("font-weight", "bold");
 // });
+
+/***/ }),
+
+/***/ "./frontend/index.js":
+/*!***************************!*\
+  !*** ./frontend/index.js ***!
+  \***************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _D3_grossing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./D3/grossing */ "./frontend/D3/grossing.js");
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("sliderContainer").style.display = "none";
+  document.getElementsByClassName("button")[0].addEventListener('click', function () {
+    document.getElementById("sliderContainer").style.display = "none";
+    var element = document.getElementById("container");
+
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+
+    var svg = document.createElement('div');
+    svg.setAttribute("id", "bubble-chart");
+    document.getElementById("container").appendChild(svg);
+    Object(_D3_grossing__WEBPACK_IMPORTED_MODULE_0__["grossing_bubble"])();
+  });
+});
 
 /***/ })
 
