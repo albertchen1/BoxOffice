@@ -5,7 +5,8 @@ module.exports = {
   entry: './frontend/index.js',
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'js/'
   },
   resolve: {
     extensions: ['.js', '*']
@@ -14,7 +15,7 @@ module.exports = {
     rules: [
       {
         test: /\.js?$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           query: {
