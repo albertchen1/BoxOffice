@@ -6,7 +6,8 @@ export const grossing_bubble = () => {
         rank: d.Rank,
         title: d.Title,
         grossing: d.Grossing,
-        genre: d.Genre
+        genre: d.Genre,
+        rating: d.Rating
     };
   }).then(function(data) {
     var width = 1000;
@@ -28,7 +29,7 @@ export const grossing_bubble = () => {
       .attr("text-anchor", "start")
       .style("font-size", "28px")
       .style("font-weight", "bold")
-      .text("Movie Grossing (in million dollars)");
+      .text("Movie Grossing");
 
     var pack = d3
       .pack()
@@ -91,7 +92,8 @@ export const grossing_bubble = () => {
         return color(d.data.genre);
       })
       .on("mouseover", function(d) {
-        tooltip.text(d.data.rank + ". " + d.data.title + ": $ " + d.data.grossing + " million");
+        tooltip.text(d.data.rank + ". " + d.data.title + ": $ " + 
+          d.data.grossing + " million. \n Rating: " + d.data.rating);
         tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
