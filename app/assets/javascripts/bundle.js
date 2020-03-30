@@ -289,9 +289,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("sliderContainer").style.display = "none";
   document.getElementsByClassName("button")[0].addEventListener('click', function () {
-    document.getElementById("sliderContainer").style.display = "none";
     var element = document.getElementById("container");
 
     while (element.firstChild) {
@@ -304,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function () {
     Object(_app_grossing__WEBPACK_IMPORTED_MODULE_0__["grossing_bubble"])();
   });
   document.getElementsByClassName("button2")[0].addEventListener('click', function () {
-    document.getElementById("sliderContainer").style.display = "none";
     var element = document.getElementById("container");
 
     while (element.firstChild) {
